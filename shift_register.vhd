@@ -21,8 +21,9 @@ signal d, p : std_logic_vector (depth-1 downto 0);
 begin
 
 	pi: for i in 0 to depth-2 generate
-		pii: p(i) <= din(i) when PL ='1' else
-					d(i+1) when SE ='1' else '0';
+		pii: p(i) <= din(i) when PL ='1' else 
+		d(i+1) when SE ='1' else
+		'0' when clrN = '0' else p(i);
 	end generate pi;
 	p(depth-1) <= din(depth-1) when PL = '1' else '0';
 
